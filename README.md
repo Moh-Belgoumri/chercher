@@ -1,14 +1,21 @@
 # search - A Linux commande line tool for file finding
 
 This tool has been developed in June 2021 by **Mohammed D. Belgoumri** as a part of a school assignment for the module *SYC2: Operating Systems2* in *ESI - École Nationale Supérieure d'Informatique - Alger (ex INI)*.
-# Description
+
+
+- [search - A Linux commande line tool for file finding](#search---a-linux-commande-line-tool-for-file-finding)
+  - [Description](#description)
+  - [Options](#options)
+
+## Description
 
 ```sh
 search [directory] [options] file
 ```
+
 If `directory` us unspecified, it will be the current directory by default.
 
-# Options
+## Options
 
     -0          Look only in the directory where its called. 
     -1          Look in the directory where its called an its immediate children
