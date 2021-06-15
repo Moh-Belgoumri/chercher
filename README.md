@@ -1,5 +1,6 @@
-# `search` - A Linux commande line tool for file finding
+# search - A Linux commande line tool for file finding
 
+This tool has been developed in June 2021 by **Mohammed D. Belgoumri** as a part of a school assignment for the module *SYC2: Operating Systems2* in *ESI - École Nationale Supérieure d'Informatique - Alger (ex INI)*.
 # Description
 
 ```sh
