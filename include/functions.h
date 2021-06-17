@@ -6,3 +6,5 @@
 #include<sys/wait.h>
 #include<readline/readline.h>
 #include<readline/history.h>
+
+void printHelp();
