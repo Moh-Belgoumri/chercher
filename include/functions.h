@@ -8,3 +8,4 @@
 #include<readline/history.h>
 
 void printHelp();
+void printVersion();

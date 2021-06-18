@@ -3,6 +3,6 @@
 int main(int argc, char *argv[])
 {
     char c;
-    printHelp();
+    printVersion();
     return 0;
 }

@@ -9,3 +9,11 @@ void printHelp()
     printf("-n\t\t\t\t\tLook in directory and all its children of depth =< n.\n");
     printf("-r\t\t\t\t\tLook recursively in directory and its children.\n");
 }
+
+
+void printVersion()
+{
+    printf("This is search version 1.0\n");
+}
+
+
