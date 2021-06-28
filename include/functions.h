@@ -7,6 +7,7 @@
 #include<readline/readline.h>
 #include<readline/history.h>
 #include<getopt.h>
+#include<sys/stat.h>
 
 void printHelp();
 void printVersion();
