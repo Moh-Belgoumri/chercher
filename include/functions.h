@@ -1,3 +1,6 @@
+#ifndef __FUNCTIONS__H__
+#define __FUNCTIONS__H__
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -9,6 +12,10 @@
 #include <getopt.h>
 #include <sys/stat.h>
 #include <fnmatch.h>
+#include <dirent.h>
 
 void printHelp();
 void printVersion();
+void printDirectory(char* path, char* pattern);
+
+#endif //__FUNCTIONS__H__

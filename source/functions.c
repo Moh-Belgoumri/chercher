@@ -16,4 +16,24 @@ void printVersion()
     printf("This is search version 1.0\n");
 }
 
+void printDirectory(char* path, char* pattern)
+{
+    DIR* directory = NULL;
+    struct dirent* file = NULL;
+    directory = opendir(path);
+    if (directory == NULL)
+    {
+        fprintf(stderr, "Error while trying to open %s\n", path);
+        exit(EXIT_FAILURE);
+    }
 
+    file = readdir(directory);
+    if(!fnmatch(pattern, file -> d_name, 0))
+        printf("%s\n", file -> d_name);
+
+    if (closedir(directory) == -1)
+    {
+        fprintf(stderr, "Error while trying to close %s\n", path);
+        exit(EXIT_FAILURE);
+    }
+}
