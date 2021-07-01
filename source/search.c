@@ -51,5 +51,6 @@ int main(int argc, char *argv[])
                 break;
         }
     }
+    printDirectory(argv[1], argv[2]);
     return EXIT_SUCCESS;
 }
