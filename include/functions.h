@@ -17,5 +17,6 @@
 void printHelp();
 void printVersion();
 void printDirectory(char* path, char* pattern);
+void printFileType(mode_t m);
 
 #endif //__FUNCTIONS__H__

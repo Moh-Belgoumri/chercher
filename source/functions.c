@@ -34,12 +34,17 @@ void printDirectory(char* path, char* pattern)
             char buf[PATH_LEN]; // To contain the full path to file
             strcpy(buf, path);  // Add path
             strcat(buf, file -> d_name); // Add file name
-            if (stat(buf, &filestat)) // Get stats in filestat
+            if (stat(buf, &filestat)) // Get status in filestat
             {
                 fprintf(stderr, "Error: Failed to get status for %s\n", buf);
                 exit(EXIT_FAILURE);
             }
-            printf("Name = %s\nSize = %ld\nProtection = %o\n",file -> d_name, filestat.st_size, (filestat.st_mode & 0777));
+            printf(
+                "Name = %s\nSize = %ld\nProtection = %o\n",
+                file -> d_name, 
+                filestat.st_size, 
+                (filestat.st_mode & 0777)
+            );
         }
     if (closedir(directory) == -1)
     {
@@ -48,5 +53,25 @@ void printDirectory(char* path, char* pattern)
     }
 }
 
-
-
+void printFileType(mode_t m)
+{
+    if (S_ISDIR(m))
+        printf("directory\n");
+    else if (S_ISREG(m))
+        printf("regular\n");
+    else if (S_ISCHR(m))
+        printf("character\n");
+    else if (S_ISBLK(m))
+        printf("block\n");
+    else if (S_ISFIFO(m))
+        printf("fifo\n");
+    else if (S_ISLNK(m))
+        printf("link\n");
+    else if (S_ISSOCK(m))
+        printf("socket\n");
+    else
+    {
+        fprintf(stderr, "Error: Unknown file type %ld\n", m);
+        exit(EXIT_FAILURE);
+    }
+}
