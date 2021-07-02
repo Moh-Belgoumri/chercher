@@ -13,7 +13,7 @@
 #include <sys/stat.h>
 #include <fnmatch.h>
 #include <dirent.h>
-
+#define PATH_LEN 1024
 void printHelp();
 void printVersion();
 void printDirectory(char* path, char* pattern);

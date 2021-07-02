@@ -26,11 +26,21 @@ void printDirectory(char* path, char* pattern)
         fprintf(stderr, "Error while trying to open %s\n", path);
         exit(EXIT_FAILURE);
     }
-
-    while((file = readdir(directory)) != NULL)
-        if(!fnmatch(pattern, file -> d_name, 0))
-            printf("%s\n", file -> d_name);
-
+    
+    while ((file = readdir(directory)) != NULL)
+        
+        if (!fnmatch(pattern, file -> d_name, 0))
+        {
+            char buf[PATH_LEN]; // To contain the full path to file
+            strcpy(buf, path);  // Add path
+            strcat(buf, file -> d_name); // Add file name
+            if (stat(buf, &filestat)) // Get stats in filestat
+            {
+                fprintf(stderr, "Error: Failed to get status for %s\n", buf);
+                exit(EXIT_FAILURE);
+            }
+            printf("Name = %s\nSize = %ld\nProtection = %o\n",file -> d_name, filestat.st_size, (filestat.st_mode & 0777));
+        }
     if (closedir(directory) == -1)
     {
         fprintf(stderr, "Error while trying to close %s\n", path);
