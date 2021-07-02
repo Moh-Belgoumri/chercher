@@ -4,6 +4,7 @@ int main(int argc, char *argv[])
 {
     int c;
     static int fall, fdate, fhelp, fmodification, fprotection, fsize, ftype, fversion;
+    int depth = __INT_MAX__;
     
     while(1)
     {
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
         printVersion();
     if (fall)
         fdate = fsize = ftype = fprotection = 1;
-    printDirectory(argv[1], argv[2], fdate, fmodification, fprotection, fsize, ftype);
+    printDirectory(argv[1], argv[2], fdate, fmodification, fprotection, fsize, ftype, depth);
+    
     return EXIT_SUCCESS;
 }

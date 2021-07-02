@@ -17,8 +17,11 @@ void printVersion()
     exit(EXIT_SUCCESS);
 }
 
-void printDirectory(char* path, char* pattern, int date, int modification, int protection, int size, int type)
+void printDirectory(char* path, char* pattern, int date, int modification, int protection, int size, int type, int depth)
 {
+    //TODO: change the recursive call so subdirectories are opened even if they are unmatched.
+    if (depth == -1)
+        return;
     DIR* directory = NULL;
     struct dirent* file = NULL;
     struct stat filestat;
@@ -38,6 +41,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         {
             char buf[PATH_LEN]; // To contain the full path to file
             strcpy(buf, path);  // Add path
+            strcat(buf, "/");
             strcat(buf, file -> d_name); // Add file name
             if (stat(buf, &filestat)) // Get status in filestat
             {
@@ -51,6 +55,17 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
                 (filestat.st_mode & 0777)
             );
             printFileType(filestat.st_mode);
+            if (S_ISDIR(filestat.st_mode))
+                printDirectory(
+                    buf,
+                    pattern,
+                    date,
+                    modification,
+                    protection,
+                    size,
+                    type,
+                    depth - 1
+                );
         }
     }
     if (closedir(directory) == -1)
