@@ -8,11 +8,13 @@ void printHelp()
     printf("-1\t\t\tLook in directory and its immediate children\n");
     printf("-n\t\t\tLook in directory and all its children of depth =< n.\n");
     printf("-r\t\t\tLook recursively in directory and its children.\n");
+    exit(EXIT_SUCCESS);
 }
 
 void printVersion()
 {
     printf("This is search version 1.0\n");
+    exit(EXIT_SUCCESS);
 }
 
 void printDirectory(char* path, char* pattern, int date, int modification, int protection, int size, int type)
@@ -20,6 +22,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
     DIR* directory = NULL;
     struct dirent* file = NULL;
     struct stat filestat;
+    char filename[PATH_LEN];
     directory = opendir(path);
     if (directory == NULL)
     {
@@ -28,8 +31,9 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
     }
     
     while ((file = readdir(directory)) != NULL)
-        // if (file -> d_name[0] == '.')
-        //     continue; // Ignore ., .. and all hidden files    
+    {
+        if (file->d_name[0] == '.')
+             continue; // Ignore ., .. and all hidden files    
         if (!fnmatch(pattern, file -> d_name, 0))
         {
             char buf[PATH_LEN]; // To contain the full path to file
@@ -48,6 +52,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
             );
             printFileType(filestat.st_mode);
         }
+    }
     if (closedir(directory) == -1)
     {
         fprintf(stderr, "Error while trying to close %s\n", path);
