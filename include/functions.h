@@ -16,7 +16,7 @@
 #define PATH_LEN 1024
 void printHelp();
 void printVersion();
-void printDirectory(char* path, char* pattern);
+void printDirectory(char* path, char* pattern, int date, int modification, int protection, int size, int type);
 void printFileType(mode_t m);
 
 #endif //__FUNCTIONS__H__

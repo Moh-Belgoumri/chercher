@@ -15,7 +15,7 @@ void printVersion()
     printf("This is search version 1.0\n");
 }
 
-void printDirectory(char* path, char* pattern)
+void printDirectory(char* path, char* pattern, int date, int modification, int protection, int size, int type)
 {
     DIR* directory = NULL;
     struct dirent* file = NULL;
@@ -28,7 +28,8 @@ void printDirectory(char* path, char* pattern)
     }
     
     while ((file = readdir(directory)) != NULL)
-        
+        // if (file -> d_name[0] == '.')
+        //     continue; // Ignore ., .. and all hidden files    
         if (!fnmatch(pattern, file -> d_name, 0))
         {
             char buf[PATH_LEN]; // To contain the full path to file

@@ -3,19 +3,20 @@
 int main(int argc, char *argv[])
 {
     int c;
+    static int fall, fdate, fhelp, fmodification, fprotection, fsize, ftype, fversion;
     
     while(1)
     {
         int opt_index = 0;    
         static struct option long_options[] = {
-            {"all",          no_argument, NULL, 'a'},
-            {"date",         no_argument, NULL, 'd'},
-            {"help",         no_argument, NULL, 'h'},
-            {"modification", no_argument, NULL, 'm'},
-            {"protection",   no_argument, NULL, 'p'},
-            {"size",         no_argument, NULL, 's'},
-            {"type",         no_argument, NULL, 't'},
-            {"version",      no_argument, NULL, 'v'},
+            {"all",          no_argument, &fall, 'a'},
+            {"date",         no_argument, &fdate, 'd'},
+            {"help",         no_argument, &fhelp, 'h'},
+            {"modification", no_argument, &fmodification, 'm'},
+            {"protection",   no_argument, &fprotection, 'p'},
+            {"size",         no_argument, &fsize, 's'},
+            {"type",         no_argument, &ftype, 't'},
+            {"version",      no_argument, &fversion, 'v'},
             {NULL,           0,           NULL,  0}
         };
         c = getopt_long(argc, argv, ":adhmprstv", long_options, &opt_index);
@@ -25,32 +26,20 @@ int main(int argc, char *argv[])
         
         switch(c)
         {
-            case 'a': 
-                break;
-            case 'd': 
-                break;
-            case 'h':
-                printHelp();
-                break;
-            case 'p': 
-                break;
-            case 'r': 
-                break;
-            case 's': 
-                break;
-            case 't': 
-                break;
-            case 'v':
-                printVersion();
-                break;
             case '?':
-                printf("Unknown option %c\n", optopt);
+                fprintf(stderr, "Error: Unknown option %c\n", optopt);
                 break;
             default:
-                printf("?? getopt returned character code 0%d ??\n", c);
+                fprintf(stderr, "Error: getopt returned character code 0%d ??\n", c);
                 break;
         }
     }
-    printDirectory(argv[1], argv[2]);
+    if (fhelp)
+        printHelp();
+    if (fversion)
+        printVersion();
+    if (fall)
+        fdate = fsize = ftype = fprotection = 1;
+    printDirectory(argv[1], argv[2], fdate, fmodification, fprotection, fsize, ftype);
     return EXIT_SUCCESS;
 }
