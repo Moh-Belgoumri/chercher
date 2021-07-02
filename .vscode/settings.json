@@ -2,5 +2,8 @@
     "files.associations": {
         "stdio.h": "c",
         "regex.h": "c"
-    }
+    },
+    "cSpell.words": [
+        "adhmprstv"
+    ]
 }

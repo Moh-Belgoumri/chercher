@@ -17,7 +17,6 @@ void printVersion()
 
 void printDirectory(char* path, char* pattern)
 {
-    printf("%s\n", pattern);
     DIR* directory = NULL;
     struct dirent* file = NULL;
     struct stat filestat;
@@ -38,3 +37,6 @@ void printDirectory(char* path, char* pattern)
         exit(EXIT_FAILURE);
     }
 }
+
+
+
