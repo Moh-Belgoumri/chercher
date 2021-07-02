@@ -45,6 +45,7 @@ void printDirectory(char* path, char* pattern)
                 filestat.st_size, 
                 (filestat.st_mode & 0777)
             );
+            printFileType(filestat.st_mode);
         }
     if (closedir(directory) == -1)
     {
@@ -56,22 +57,22 @@ void printDirectory(char* path, char* pattern)
 void printFileType(mode_t m)
 {
     if (S_ISDIR(m))
-        printf("directory\n");
+        printf("%-11s\n","directory");
     else if (S_ISREG(m))
-        printf("regular\n");
+        printf("%-11s\n","regular");
     else if (S_ISCHR(m))
-        printf("character\n");
+        printf("%-11s\n","character");
     else if (S_ISBLK(m))
-        printf("block\n");
+        printf("%-11s\n","block");
     else if (S_ISFIFO(m))
-        printf("fifo\n");
+        printf("%-11s\n","fifo");
     else if (S_ISLNK(m))
-        printf("link\n");
+        printf("%-11s\n","link");
     else if (S_ISSOCK(m))
-        printf("socket\n");
+        printf("%-11s\n","socket");
     else
     {
-        fprintf(stderr, "Error: Unknown file type %ld\n", m);
+        fprintf(stderr, "Error: Unknown file type %d\n", m);
         exit(EXIT_FAILURE);
     }
 }
