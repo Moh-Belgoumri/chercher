@@ -20,6 +20,7 @@ void printDirectory(char* path, char* pattern)
 {
     DIR* directory = NULL;
     struct dirent* file = NULL;
+    struct stat filestat;
     directory = opendir(path);
     if (directory == NULL)
     {
@@ -27,9 +28,9 @@ void printDirectory(char* path, char* pattern)
         exit(EXIT_FAILURE);
     }
 
-    file = readdir(directory);
-    if(!fnmatch(pattern, file -> d_name, 0))
-        printf("%s\n", file -> d_name);
+    while((file = readdir(directory)) != NULL)
+        if(!fnmatch(pattern, file -> d_name, 0))
+            printf("%s\n", file -> d_name);
 
     if (closedir(directory) == -1)
     {
