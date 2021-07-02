@@ -10,7 +10,6 @@ void printHelp()
     printf("-r\t\t\tLook recursively in directory and its children.\n");
 }
 
-
 void printVersion()
 {
     printf("This is search version 1.0\n");
@@ -18,6 +17,7 @@ void printVersion()
 
 void printDirectory(char* path, char* pattern)
 {
+    printf("%s\n", pattern);
     DIR* directory = NULL;
     struct dirent* file = NULL;
     struct stat filestat;
