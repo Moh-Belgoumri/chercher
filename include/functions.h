@@ -31,4 +31,5 @@ void printFileType(mode_t m, int type);
 void printHeader(int date, int modification, int protection, int size, int type);
 void printLastUsed(int date, struct stat filestat);
 void printLastModified(int modification, struct stat filestat);
+void printProtection(int protection, struct stat filestat);
 #endif //__FUNCTIONS__H__

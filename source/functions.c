@@ -71,6 +71,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         if (!fnmatch(pattern, file -> d_name, 0))
         {
             printFileType(filestat.st_mode, type);
+            printProtection(protection, filestat);
             printLastUsed(date, filestat);
             printLastModified(modification, filestat);
             printf("%s\n", buf);
@@ -146,6 +147,17 @@ void printLastModified(int modification, struct stat filestat)
             localtime(&filestat.st_atim.tv_sec)->tm_mday,
             (localtime(&filestat.st_atim.tv_sec)->tm_mon + 1),
             (localtime(&filestat.st_atim.tv_sec)->tm_year + 1900),
+            " "
+        );
+}
+
+
+void printProtection(int protection, struct stat filestat)
+{
+    if (protection)
+        printf(
+            "%o%-9s", 
+            (filestat.st_mode & 0777), // Mode & mask
             " "
         );
 }
