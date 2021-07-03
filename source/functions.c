@@ -70,10 +70,13 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         if (!fnmatch(pattern, file -> d_name, 0))
         {
             printf(
-                "Name = %s\nSize = %ld\nProtection = %o\n",
+                "Name = %s\nSize = %ld\nProtection = %o\nDate=%02d/%02d/%04d\n",
                 file -> d_name, 
                 filestat.st_size, 
-                (filestat.st_mode & 0777)
+                (filestat.st_mode & 0777),
+                localtime(&filestat.st_atim.tv_sec)->tm_mday,
+                (localtime(&filestat.st_atim.tv_sec)->tm_mon + 1),
+                (localtime(&filestat.st_atim.tv_sec)->tm_year + 1900)
             );
             printFileType(filestat.st_mode);
         }
