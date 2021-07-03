@@ -72,6 +72,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         {
             printFileType(filestat.st_mode, type);
             printProtection(protection, filestat);
+            printSize(size, filestat);
             printLastUsed(date, filestat);
             printLastModified(modification, filestat);
             printf("%s\n", buf);
@@ -118,7 +119,7 @@ void printHeader(int date, int modification, int protection, int size, int type)
     if (protection)
         printf("%-12s", "Protection");
     if (size)
-        printf("%-6s", "Size"); 
+        printf("%-10s", "Size"); 
     if(date)
         printf("%-14s", "Last used");
     if (modification)
@@ -151,7 +152,6 @@ void printLastModified(int modification, struct stat filestat)
         );
 }
 
-
 void printProtection(int protection, struct stat filestat)
 {
     if (protection)
@@ -160,4 +160,39 @@ void printProtection(int protection, struct stat filestat)
             (filestat.st_mode & 0777), // Mode & mask
             " "
         );
+}
+
+void printSize(int size, struct stat filestat)
+{
+    if (size)
+        printf(
+            "%4ld %-3s%-2s", 
+            reducedSize(filestat.st_size),
+            unit(filestat.st_size),
+            " "
+        );
+}
+
+const char *unit(off_t bytes)
+{
+    if (bytes < 10000)
+        return "";
+    else if (bytes < 10000000)
+        return "Kbs";
+    else if (bytes < 10000000000)
+        return "Mbs";
+    else 
+        return "Tbs";
+}
+
+off_t reducedSize(off_t bytes)
+{
+    if (bytes < 10000)
+        return bytes;
+    else if (bytes < 10000000)
+        return bytes / 1000;
+    else if (bytes < 10000000000)
+        return bytes / 1000000;
+    else 
+        return bytes / 1000000000;
 }
