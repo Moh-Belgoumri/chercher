@@ -72,7 +72,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         {
             printFileType(filestat.st_mode, type);
             printLastUsed(date, filestat);
-            //printFileType(filestat.st_mode);
+            printLastModified(modification, filestat);
             printf("%s\n", buf);
         }
     }
@@ -131,6 +131,18 @@ void printLastUsed(int date, struct stat filestat)
     if (date)
         printf(
             "%02d/%02d/%04d%-4s",
+            localtime(&filestat.st_atim.tv_sec)->tm_mday,
+            (localtime(&filestat.st_atim.tv_sec)->tm_mon + 1),
+            (localtime(&filestat.st_atim.tv_sec)->tm_year + 1900),
+            " "
+        );
+}
+
+void printLastModified(int modification, struct stat filestat)
+{
+    if (modification)
+        printf(
+            "%02d/%02d/%04d%-5s",
             localtime(&filestat.st_atim.tv_sec)->tm_mday,
             (localtime(&filestat.st_atim.tv_sec)->tm_mon + 1),
             (localtime(&filestat.st_atim.tv_sec)->tm_year + 1900),
