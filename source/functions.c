@@ -211,7 +211,7 @@ const char *unit(off_t bytes)
     else if (bytes < 10000000000)
         return "Mbs";
     else 
-        return "Tbs";
+        return "Gbs";
 }
 
 off_t reducedSize(off_t bytes)
