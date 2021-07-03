@@ -1,14 +1,31 @@
 #include"include/functions.h"
 
-void printHelp()
+void printHelp(int help)
 {
-    printf("-h --help\t\tPrint this help text and exit.\n");
-    printf("-v --version\t\tPrint program version and exit.\n");
-    printf("-0\t\t\tLook only in directory.\n");
-    printf("-1\t\t\tLook in directory and its immediate children\n");
-    printf("-n\t\t\tLook in directory and all its children of depth =< n.\n");
-    printf("-r\t\t\tLook recursively in directory and its children.\n");
-    exit(EXIT_SUCCESS);
+    if (help) 
+    {
+        printf("This is search version 1.0.0\n");
+        // Synopsis
+        printf("Synopsis:\n");
+        printf("\tsearch [directory][-a][-d][-h][-m][-n][-p][-s][-t][-v] pattern\n");
+        
+        // Description
+        printf("Description:\n");
+        printf("\tPrints out a list of all files matching `pattern` within `directory`. If `directory` \n\tis unspecified, the working directory is the default.\n");
+
+        // Options
+        printf("Options:\n");
+        printf("\t-a\t\t\tSame as  -d -s -t -p\n");
+        printf("\t-d\t\t\tPrint last access date.\n");
+        printf("\t-h\t\t\tPrint this help text and exit.\n");
+        printf("\t-m\t\t\tPrint last modification date.\n");
+        printf("\t-n (n integer)\t\tSearch in directory and all its children of depth =< n (infinite by default).\n");
+        printf("\t-p\t\t\tPrint protection.\n");
+        printf("\t-s\t\t\tPrint size.\n");
+        printf("\t-t\t\t\tPrint type.\n");
+        printf("\t-v\t\t\tPrint program version and exit.\n");
+        exit(EXIT_SUCCESS);
+    }
 }
 
 void printVersion()

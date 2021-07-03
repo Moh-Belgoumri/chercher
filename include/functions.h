@@ -15,7 +15,7 @@
 #include <dirent.h>
 
 #define PATH_LEN 1024
-void printHelp();
+void printHelp(int help);
 void printVersion();
 void printDirectory(
     char* path, 

@@ -64,6 +64,8 @@ int main(int argc, char *argv[])
         
     }
 
+    printHelp(fhelp);
+    
     // Test for missing arguments
     if (regargc == 0)
         fprintf(stderr, "Error: Missing mandatory argument: filename");
@@ -80,19 +82,11 @@ int main(int argc, char *argv[])
         strcpy(pattern, regargv[1]);
     }
     else
-        fprintf(stderr, "err: regargc%d\n", regargc);
+        fprintf(stderr, "Error: Too many arguments\n");
 
    
     
-    // Loop to parse depth
-    // for (int i = 0; i < argc; i++)
-    // {
-    //     if (argv[i][0] == '-')
-    //         if (isdigit(argv[i][1]))
-    //             depth = atoi(argv[i] + 1);
-    // }
-    if (fhelp)
-        printHelp();
+    
     if (fversion)
         printVersion();
     if (fall)
