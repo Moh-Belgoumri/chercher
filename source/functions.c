@@ -69,16 +69,9 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         // Test for pattern match
         if (!fnmatch(pattern, file -> d_name, 0))
         {
-            printf(
-                "Name = %s\nSize = %ld\nProtection = %o\nDate=%02d/%02d/%04d\n",
-                file -> d_name, 
-                filestat.st_size, 
-                (filestat.st_mode & 0777),
-                localtime(&filestat.st_atim.tv_sec)->tm_mday,
-                (localtime(&filestat.st_atim.tv_sec)->tm_mon + 1),
-                (localtime(&filestat.st_atim.tv_sec)->tm_year + 1900)
-            );
-            printFileType(filestat.st_mode);
+            printLastUsed(date, filestat);
+            //printFileType(filestat.st_mode);
+            printf("%s\n", file -> d_name);
         }
     }
     // Close directory and exit if failed
@@ -114,11 +107,28 @@ void printFileType(mode_t m)
 
 void printHeader(int date, int modification, int protection, int size, int type)
 {
-    printf("%-12s", "Type");
-    printf("%-12s", "Protection");
-    printf("%-6s", "Size");
-    printf("%-12s", "Last used");
-    printf("%-15s", "Last modified");
+    if (type)
+        printf("%-12s", "Type");
+    if (protection)
+        printf("%-12s", "Protection");
+    if (size)
+        printf("%-6s", "Size"); 
+    if(date)
+        printf("%-14s", "Last used");
+    if (modification)
+        printf("%-15s", "Last modified");
+   
     printf("%s\n", "Name");
 }
 
+void printLastUsed(int date, struct stat filestat)
+{
+    if (date)
+        printf(
+            "%02d/%02d/%04d%-4s",
+            localtime(&filestat.st_atim.tv_sec)->tm_mday,
+            (localtime(&filestat.st_atim.tv_sec)->tm_mon + 1),
+            (localtime(&filestat.st_atim.tv_sec)->tm_year + 1900),
+            " "
+        );
+}
