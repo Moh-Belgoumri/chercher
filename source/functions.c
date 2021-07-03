@@ -70,7 +70,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         // Test for pattern match
         if (!fnmatch(pattern, file -> d_name, 0))
         {
-            printFileType(filestat.st_mode, type);
+            printFileType(type, filestat);
             printProtection(protection, filestat);
             printSize(size, filestat);
             printLastUsed(date, filestat);
@@ -86,29 +86,29 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
     }
 }
 
-void printFileType(mode_t m, int type)
+void printFileType(int type, struct stat filestat)
 {
     if (type)
     {
-        if (S_ISDIR(m))
+        if (S_ISDIR(filestat.st_mode))
             printf("%-12s","directory");
-        else if (S_ISREG(m))
+        else if (S_ISREG(filestat.st_mode))
             printf("%-12s","regular");
-        else if (S_ISCHR(m))
+        else if (S_ISCHR(filestat.st_mode))
             printf("%-12s","character");
-        else if (S_ISBLK(m))
+        else if (S_ISBLK(filestat.st_mode))
             printf("%-12s","block");
-        else if (S_ISFIFO(m))
+        else if (S_ISFIFO(filestat.st_mode))
             printf("%-12s","fifo");
-        else if (S_ISLNK(m))
+        else if (S_ISLNK(filestat.st_mode))
             printf("%-12s","link");
-        else if (S_ISSOCK(m))
+        else if (S_ISSOCK(filestat.st_mode))
             printf("%-12s","socket");
         else
-    {
-        fprintf(stderr, "Error: Unknown file type %d\n", m);
-        exit(EXIT_FAILURE);
-    }
+        {
+            fprintf(stderr, "Error: Unknown file type %d\n", filestat.st_mode);
+            exit(EXIT_FAILURE);
+        }
     }
 }
 

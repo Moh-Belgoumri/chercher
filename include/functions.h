@@ -27,7 +27,7 @@ void printDirectory(
     int type, 
     int depth
 );
-void printFileType(mode_t m, int type);
+void printFileType(int type, struct stat filestat);
 void printHeader(int date, int modification, int protection, int size, int type);
 void printLastUsed(int date, struct stat filestat);
 void printLastModified(int modification, struct stat filestat);
