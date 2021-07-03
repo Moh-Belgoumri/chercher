@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
         printVersion();
     if (fall)
         fdate = fsize = ftype = fprotection = 1;
-    printHeader(1, 1, 1, fsize, 1);
+    printHeader(1, 1, 1, 1, 1);
     // printf("%-12s%-12s%-6s%-12s%-15s%s\n", "directory", "777", "4096", "03-07-2021", "03-07-2021", "functions");
-    printDirectory(argv[1], argv[2], 1, 1, 1, fsize, 1, depth);
+    printDirectory(argv[1], argv[2], 1, 1, 1, 1, 1, depth);
     return EXIT_SUCCESS;
 }
