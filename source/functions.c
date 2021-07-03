@@ -89,22 +89,33 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
 void printFileType(mode_t m)
 {
     if (S_ISDIR(m))
-        printf("%-11s\n","directory");
+        printf("%-12s\n","directory");
     else if (S_ISREG(m))
-        printf("%-11s\n","regular");
+        printf("%-12s\n","regular");
     else if (S_ISCHR(m))
-        printf("%-11s\n","character");
+        printf("%-12s\n","character");
     else if (S_ISBLK(m))
-        printf("%-11s\n","block");
+        printf("%-12s\n","block");
     else if (S_ISFIFO(m))
-        printf("%-11s\n","fifo");
+        printf("%-12s\n","fifo");
     else if (S_ISLNK(m))
-        printf("%-11s\n","link");
+        printf("%-12s\n","link");
     else if (S_ISSOCK(m))
-        printf("%-11s\n","socket");
+        printf("%-12s\n","socket");
     else
     {
         fprintf(stderr, "Error: Unknown file type %d\n", m);
         exit(EXIT_FAILURE);
     }
 }
+
+void printHeader(int date, int modification, int protection, int size, int type)
+{
+    printf("%-12s", "Type");
+    printf("%-12s", "Protection");
+    printf("%-6s", "Size");
+    printf("%-12s", "Last used");
+    printf("%-15s", "Last modified");
+    printf("%s\n", "Name");
+}
+
