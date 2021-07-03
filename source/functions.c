@@ -45,7 +45,8 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         
         char buf[PATH_LEN]; // To contain the full path to file
         strcpy(buf, path);  // Add path
-        strcat(buf, "/");
+        if (strcmp(buf, "/")) // If path is /, no need to add a '/'
+            strcat(buf, "/");
         strcat(buf, file -> d_name); // Add file name
         if (stat(buf, &filestat)) // Get status in filestat and exit if stat failed
         {
@@ -69,9 +70,10 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
         // Test for pattern match
         if (!fnmatch(pattern, file -> d_name, 0))
         {
+            printFileType(filestat.st_mode, type);
             printLastUsed(date, filestat);
             //printFileType(filestat.st_mode);
-            printf("%s\n", file -> d_name);
+            printf("%s\n", buf);
         }
     }
     // Close directory and exit if failed
@@ -82,26 +84,29 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
     }
 }
 
-void printFileType(mode_t m)
+void printFileType(mode_t m, int type)
 {
-    if (S_ISDIR(m))
-        printf("%-12s\n","directory");
-    else if (S_ISREG(m))
-        printf("%-12s\n","regular");
-    else if (S_ISCHR(m))
-        printf("%-12s\n","character");
-    else if (S_ISBLK(m))
-        printf("%-12s\n","block");
-    else if (S_ISFIFO(m))
-        printf("%-12s\n","fifo");
-    else if (S_ISLNK(m))
-        printf("%-12s\n","link");
-    else if (S_ISSOCK(m))
-        printf("%-12s\n","socket");
-    else
+    if (type)
+    {
+        if (S_ISDIR(m))
+            printf("%-12s","directory");
+        else if (S_ISREG(m))
+            printf("%-12s","regular");
+        else if (S_ISCHR(m))
+            printf("%-12s","character");
+        else if (S_ISBLK(m))
+            printf("%-12s","block");
+        else if (S_ISFIFO(m))
+            printf("%-12s","fifo");
+        else if (S_ISLNK(m))
+            printf("%-12s","link");
+        else if (S_ISSOCK(m))
+            printf("%-12s","socket");
+        else
     {
         fprintf(stderr, "Error: Unknown file type %d\n", m);
         exit(EXIT_FAILURE);
+    }
     }
 }
 
