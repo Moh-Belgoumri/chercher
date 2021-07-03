@@ -2,47 +2,102 @@
 
 int main(int argc, char *argv[])
 {
-    int c;
-    static int fall, fdate, fhelp, fmodification, fprotection, fsize, ftype, fversion;
+    int c; //To contain getopt() return
+    static int fall, fdate, fhelp, fmodification, fprotection, fsize, ftype, fversion; //flag returns
     int depth = __INT_MAX__;
-    
-    while(1)
+    char path[PATH_LEN];
+    char pattern[PATH_LEN];
+    char regargv[2][PATH_LEN];
+    int regargc = 0;
+    // Loop to parse args
+    for (int i = 1; i < argc; i++)
     {
-        int opt_index = 0;    
-        static struct option long_options[] = {
-            {"all",          no_argument, &fall, 'a'},
-            {"date",         no_argument, &fdate, 'd'},
-            {"help",         no_argument, &fhelp, 'h'},
-            {"modification", no_argument, &fmodification, 'm'},
-            {"protection",   no_argument, &fprotection, 'p'},
-            {"size",         no_argument, &fsize, 's'},
-            {"type",         no_argument, &ftype, 't'},
-            {"version",      no_argument, &fversion, 'v'},
-            {NULL,           0,           NULL,  0}
-        };
-        c = getopt_long(argc, argv, ":adhmprstv", long_options, &opt_index);
-        
-        if (c == -1)
-            break;
-        
-        switch(c)
+        //Handle flags
+        if (argv[i][0] == '-')
         {
-            case '?':
-                fprintf(stderr, "Error: Unknown option %c\n", optopt);
-                break;
-            default:
-                fprintf(stderr, "Error: getopt returned character code 0%d ??\n", c);
-                break;
+            // depth
+            if (isdigit(argv[i][1]))
+            {   
+                depth = atoi(argv[i] + 1);
+            }
+            // Flags
+            else 
+            {
+                switch (argv[i][1])
+                {
+                    case 'a':
+                        fall = 1;
+                        break;
+                    case 'v':
+                        fversion = 1;
+                        break;
+                    case 'h':
+                        fhelp = 1;
+                        break;
+                    case 'd':
+                        fdate = 1;
+                        break;
+                    case 'm':
+                        fmodification = 1;
+                        break;
+                    case 'p':
+                        fprotection = 1;
+                        break;
+                    case 's':
+                        fsize = 1;
+                        break;
+                    case 't':
+                        ftype = 1;
+                        break;
+                    default:
+                        fprintf(stderr, "Error: Unknown option: %s\n", argv[i] + 1);
+                        break;
+                }
+            } 
         }
+        // Regular arguments
+        else
+        {
+            strcpy(regargv[regargc], argv[i]);
+            regargc++;     
+        }
+        
     }
+
+    // Test for missing arguments
+    if (regargc == 0)
+        fprintf(stderr, "Error: Missing mandatory argument: filename");
+    
+    // Test for missing path
+    else if (regargc == 1)
+    {
+        strcpy(path, "."); //Default path is .
+        strcpy(pattern, regargv[0]);
+    }   
+    else if (regargc == 2)
+    {
+        strcpy(path, regargv[0]);
+        strcpy(pattern, regargv[1]);
+    }
+    else
+        fprintf(stderr, "err: regargc%d\n", regargc);
+
+   
+    
+    // Loop to parse depth
+    // for (int i = 0; i < argc; i++)
+    // {
+    //     if (argv[i][0] == '-')
+    //         if (isdigit(argv[i][1]))
+    //             depth = atoi(argv[i] + 1);
+    // }
     if (fhelp)
         printHelp();
     if (fversion)
         printVersion();
     if (fall)
         fdate = fsize = ftype = fprotection = 1;
-    printHeader(1, 1, 1, 1, 1);
-    // printf("%-12s%-12s%-6s%-12s%-15s%s\n", "directory", "777", "4096", "03-07-2021", "03-07-2021", "functions");
-    printDirectory(argv[1], argv[2], 1, 1, 1, 1, 1, depth);
+    printHeader(fdate, fmodification, fprotection, fsize, ftype);
+    printDirectory(path, pattern, fdate, fmodification, fprotection, fsize, ftype, depth);
     return EXIT_SUCCESS;
 }

@@ -17,7 +17,16 @@ void printVersion()
     exit(EXIT_SUCCESS);
 }
 
-void printDirectory(char* path, char* pattern, int date, int modification, int protection, int size, int type, int depth)
+void printDirectory(
+    char* path, 
+    char* pattern, 
+    int date, 
+    int modification, 
+    int protection, 
+    int size, 
+    int type, 
+    int depth
+)
 {
     // Exit if depth reached
     if (depth == -1)
@@ -67,7 +76,7 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
                 depth - 1
             );
 
-        // Test for pattern match
+        // Test for pattern match and print if successful
         if (!fnmatch(pattern, file -> d_name, 0))
         {
             printFileType(type, filestat);
