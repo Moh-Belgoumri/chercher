@@ -19,35 +19,56 @@ void printVersion()
 
 void printDirectory(char* path, char* pattern, int date, int modification, int protection, int size, int type, int depth)
 {
-    //TODO: change the recursive call so subdirectories are opened even if they are unmatched.
+    // Exit if depth reached
     if (depth == -1)
         return;
-    DIR* directory = NULL;
-    struct dirent* file = NULL;
-    struct stat filestat;
-    char filename[PATH_LEN];
+
+    DIR* directory = NULL; // To contain the opened directory
+    struct dirent* file = NULL; // To contain the files in directory
+    struct stat filestat; // To contain file status
+     
     directory = opendir(path);
+    
+    // Open path in directory and exit if failed
     if (directory == NULL)
     {
         fprintf(stderr, "Error while trying to open %s\n", path);
         exit(EXIT_FAILURE);
     }
     
+    //Readdir until NULL
     while ((file = readdir(directory)) != NULL)
     {
+        // Ignore ., .. and all hidden files
         if (file->d_name[0] == '.')
-             continue; // Ignore ., .. and all hidden files    
+             continue;     
+        
+        char buf[PATH_LEN]; // To contain the full path to file
+        strcpy(buf, path);  // Add path
+        strcat(buf, "/");
+        strcat(buf, file -> d_name); // Add file name
+        if (stat(buf, &filestat)) // Get status in filestat and exit if stat failed
+        {
+            fprintf(stderr, "Error: Failed to get status for %s\n", buf);
+            exit(EXIT_FAILURE);
+        }
+
+        // If file is a directory, apply the search to it recursively
+        if (S_ISDIR(filestat.st_mode))
+            printDirectory(
+                buf,
+                pattern,
+                date,
+                modification,
+                protection,
+                size,
+                type,
+                depth - 1
+            );
+
+        // Test for pattern match
         if (!fnmatch(pattern, file -> d_name, 0))
         {
-            char buf[PATH_LEN]; // To contain the full path to file
-            strcpy(buf, path);  // Add path
-            strcat(buf, "/");
-            strcat(buf, file -> d_name); // Add file name
-            if (stat(buf, &filestat)) // Get status in filestat
-            {
-                fprintf(stderr, "Error: Failed to get status for %s\n", buf);
-                exit(EXIT_FAILURE);
-            }
             printf(
                 "Name = %s\nSize = %ld\nProtection = %o\n",
                 file -> d_name, 
@@ -55,19 +76,9 @@ void printDirectory(char* path, char* pattern, int date, int modification, int p
                 (filestat.st_mode & 0777)
             );
             printFileType(filestat.st_mode);
-            if (S_ISDIR(filestat.st_mode))
-                printDirectory(
-                    buf,
-                    pattern,
-                    date,
-                    modification,
-                    protection,
-                    size,
-                    type,
-                    depth - 1
-                );
         }
     }
+    // Close directory and exit if failed
     if (closedir(directory) == -1)
     {
         fprintf(stderr, "Error while trying to close %s\n", path);
