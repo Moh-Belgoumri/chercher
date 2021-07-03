@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     }
 
     printHelp(fhelp);
-    
+    printVersion(fversion);
     // Test for missing arguments
     if (regargc == 0)
         fprintf(stderr, "Error: Missing mandatory argument: filename");
@@ -84,11 +84,7 @@ int main(int argc, char *argv[])
     else
         fprintf(stderr, "Error: Too many arguments\n");
 
-   
-    
-    
-    if (fversion)
-        printVersion();
+    // Handle -a   
     if (fall)
         fdate = fsize = ftype = fprotection = 1;
     printHeader(fdate, fmodification, fprotection, fsize, ftype);

@@ -16,7 +16,7 @@
 
 #define PATH_LEN 1024
 void printHelp(int help);
-void printVersion();
+void printVersion(int version);
 void printDirectory(
     char* path, 
     char* pattern, 

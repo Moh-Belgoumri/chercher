@@ -28,7 +28,7 @@ void printHelp(int help)
     }
 }
 
-void printVersion()
+void printVersion(int version)
 {
     printf("This is search version 1.0\n");
     exit(EXIT_SUCCESS);
