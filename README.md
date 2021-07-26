@@ -1,32 +1,43 @@
-# search - A Linux commande line tool for file finding
+# search - A Linux commande line tool to find files by name
 
-This tool has been developed in June 2021 by **Mohammed D. Belgoumri** as a part of a school assignment for the module *SYS2: Operating Systems2* in *ESI - École Nationale Supérieure d'Informatique - Alger (ex INI)*.
+This tool was initially developed in June 2021 by **Mohammed D. Belgoumri** as a school assignment for the module *SYS2: Operating Systems 2* at [ESI - École Nationale Supérieure d'Informatique - Alger (ex INI)](https://www.esi.dz).
 
-- [search - A Linux commande line tool for file finding](#search---a-linux-commande-line-tool-for-file-finding)
-  - [Synopsis](#synopsis)
-  - [Description](#description)
-  - [Options](#options)
+- [search - A Linux commande line tool to find files by name](#search---a-linux-commande-line-tool-to-find-files-by-name)
+  - [NAME](#name)
+  - [SYNOPSIS](#synopsis)
+  - [DESCRIPTION](#description)
+  - [OPTIONS](#options)
+  - [AUTHOR](#author)
 
-## Synopsis
+## NAME
+
+`search` - search for files and directories.
+
+## SYNOPSIS
 
 ```sh
-search [directory] [options] expression
+search [directory] [h |v | [a] [-l | [pstH]] [-d <max> | r]] pattern.
 ```
 
-## Description
+## DESCRIPTION
 
-Prints out a list of all files matching `expression` within directory. If `directory` us unspecified, the working directory is the default.
+Prints out the paths of all files and directories matching `pattern` within `directory`. If `directory` us unspecified, the working directory is the default.
 
-## Options
+## OPTIONS
 
 ```text
-  -h --help           Print this help text and exit.
-  -v --version        Print program version and exit.
-  -m --modification   Print the date of last modification.
-  -d --date           Print the date of creation and that of last use (modification or consultation).
-  -s --size           Print the file size (in octets).
-  -t --type           Print the file type.
-  -p --protection     Print the file protection.
-  -n                  Look in the directory where its called and all its children of depth =< n.
-  -r                  Look recursively in the directory and its children.
+  -a --all            Do not ignore hidden files an directories.
+  -d --depth <max>    Search in directory and its subdirectories up to a depth of max. If -d is not used, max = 0.
+  -h --help           Print help message and exit.
+  -l --long           Use long output format. (Synonym of -psH).
+  -p --permissions    Show access permissions.
+  -r --Recursive      Search recursively in directory and its subdirectories.
+  -s --size           Show the item size (in bytes).
+  -t --type           Show the item type.
+  -v --version        Show program version and exit.
+  -H --history        Show the dates of creation, last modification and last access.
 ```
+
+## AUTHOR
+
+Written by Mohammed D. Belgoumri.
