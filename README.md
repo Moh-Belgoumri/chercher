@@ -6,7 +6,8 @@ This tool was initially developed in June 2021 by **Mohammed D. Belgoumri** as a
   - [NAME](#name)
   - [SYNOPSIS](#synopsis)
   - [DESCRIPTION](#description)
-  - [OPTIONS](#options)
+    - [ARGUMENTS](#arguments)
+    - [OPTIONS](#options)
   - [AUTHOR](#author)
 
 ## NAME
@@ -16,14 +17,21 @@ This tool was initially developed in June 2021 by **Mohammed D. Belgoumri** as a
 ## SYNOPSIS
 
 ```sh
-search [directory] [h |v | [a] [-l | [pstH]] [-d <max> | r]] pattern.
+search [directory] [h | v | [a] [-l | [p] [s] [t] [H] ] [-d <max> | r]] pattern
 ```
 
 ## DESCRIPTION
 
-Prints out the paths of all files and directories matching `pattern` within `directory`. If `directory` us unspecified, the working directory is the default.
+Prints out the paths of all files and directories matching `pattern` within `directory`.
 
-## OPTIONS
+### ARGUMENTS
+
+```text
+directory (optional): The root directory for the search, defaults to the working directory.
+pattern (mandatory): A wildcard pattern to match the contents of directory against.
+```
+
+### OPTIONS
 
 ```text
   -a --all            Do not ignore hidden files an directories.
