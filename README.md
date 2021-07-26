@@ -27,8 +27,8 @@ Prints out the paths of all files and directories matching `pattern` within `dir
 ### ARGUMENTS
 
 ```text
-directory (optional): The root directory for the search, defaults to the working directory.
-pattern (mandatory): A wildcard pattern to match the contents of directory against.
+  directory (optional): The root directory for the search, defaults to the working directory.
+  pattern (mandatory): A wildcard pattern to match the contents of directory against.
 ```
 
 ### OPTIONS
