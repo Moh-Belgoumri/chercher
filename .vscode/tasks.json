@@ -1,0 +1,68 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "compile utilities",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-c",
+                "-I",
+                ".",
+                "./source/utilities.cpp",
+                "-o",
+                "./lib/utilities.o",
+                "--std=c++17"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "type": "shell",
+            "label": "compile main",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-c",
+                "-I",
+                ".",
+                "./source/main.cpp",
+                "-o",
+                "./lib/main.o",
+                "--std=c++17"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "link",
+            "command": "/usr/bin/g++",
+            "args": [
+                "./lib/utilities.o",
+                "./lib/main.o",
+                "-o",
+                "out/search",
+                "--std=c++17"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn":["compile utilities", "compile main"]
+        },
+        {
+            "label": "Build",
+            "dependsOn": [
+                "compile utilities",
+                "compile main",
+                "link"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
