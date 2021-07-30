@@ -10,7 +10,8 @@
 #include <sys/stat.h>
 #include <map>
 #include <iomanip>
+#define VERSION "1.0.0"
 
 void printHelpMessage();
-
+void printVersion();
 #endif // __UTILITIES__HPP__

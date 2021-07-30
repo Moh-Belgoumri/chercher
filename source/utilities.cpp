@@ -93,3 +93,8 @@ void printHelpMessage()
     std::cout << "\e[0m" << "\t" << author <<std::endl;
 }
 
+void printVersion()
+{
+    /*Prints the version and exits*/
+    std::cout << "This is search version " << VERSION << std::endl;
+}
