@@ -16,7 +16,7 @@ This tool was initially developed in June 2021 by **Mohammed D. Belgoumri** as a
 
 ## SYNOPSIS
 
-```sh
+```text
 search [directory] [h | v | [a] [-l | [p] [s] [t] [H] ] [-d <max> | r]] pattern
 ```
 
