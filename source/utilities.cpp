@@ -1,8 +1,12 @@
 #include "include/utilities.hpp"
 
+/**
+ * @brief Prints help message and exits
+ * @author Mohammed D. Belgoumri
+ * TODO : Merge std::cout calls 
+*/
 void printHelpMessage()
 {
-    /*Prints the help message and exits*/
 
     // Short description string
     std::string shortDescription = "search - search for files and directories.";
@@ -93,7 +97,10 @@ void printHelpMessage()
     std::cout << "\e[0m" << "\t" << author <<std::endl;
 }
 
-/*Prints the version and exits*/
+/**
+ * @brief Prints the program version and exits.
+ * @author Mohammed D. Belgoumri
+*/
 void printVersion()
 {
     std::cout << "This is search version " << VERSION << std::endl;
