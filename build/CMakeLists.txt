@@ -14,5 +14,5 @@ add_executable(
 include_directories(${WORKING_DIRECTORY})
 set_target_properties(
     search PROPERTIES
-    CMAKE_RUNTIME_OUTPUT_DIRECTORY ${WORKING_DIRECTORY}/out
+    RUNTIME_OUTPUT_DIRECTORY ${WORKING_DIRECTORY}/out
 )
