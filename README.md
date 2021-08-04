@@ -17,7 +17,7 @@ This tool was initially developed in June 2021 by **Mohammed D. Belgoumri** as a
 ## SYNOPSIS
 
 ```text
-search [directory] [h | v | [a] [-l | [p] [s] [t] [H] ] [-d <max> | r]] pattern
+search [directory] [-h | -v | [-a] [-l | [-p] [-s] [-t] [-H] ] [-d <max> | -r]] pattern
 ```
 
 ## DESCRIPTION
@@ -34,7 +34,7 @@ Prints out the paths of all files and directories matching `pattern` within `dir
 ### OPTIONS
 
 ```text
-  -a --all            Do not ignore hidden files an directories.
+  -a --all            Do not ignore hidden files and directories.
   -d --depth <max>    Search in directory and its subdirectories up to a depth of max. If -d is not used, max = 0.
   -h --help           Print help message and exit.
   -l --long           Use long output format. (Synonym of -psH).
