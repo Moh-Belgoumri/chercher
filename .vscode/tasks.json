@@ -16,7 +16,7 @@
             ],
             "isBackground": true,
             "problemMatcher": [],
-            "group": "build"
+            
         },
         {
             "type": "shell",
@@ -31,7 +31,6 @@
                 "./lib/main.o",
                 "--std=c++17"
             ],
-            "group": "build",
             "problemMatcher": []
         },
         {
@@ -45,14 +44,11 @@
                 "out/search",
                 "--std=c++17"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
             "dependsOn": [
                 "compile utilities",
                 "compile main"
-            ]
+            ],
+            "problemMatcher": []
         },
         {
             "label": "Build",
@@ -62,10 +58,7 @@
                 "link"
             ],
             "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            
         },
         {
             "type": "shell",
@@ -84,6 +77,20 @@
             "problemMatcher": [],
             "group": {
                 "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "/usr/bin/make",
+            "args": [
+                "-C",
+                "${workspaceFolder}/build"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
                 "isDefault": true
             }
         }
