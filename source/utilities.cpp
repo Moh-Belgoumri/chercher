@@ -12,7 +12,7 @@ void printHelpMessage()
     std::string shortDescription = "search - search for files and directories.";
 
     // Synopsis
-    std::string synopsis = "search [directory] [-h | -v | [-a] [-l | [-p] [-s] [-t] [-H]] [-d <max> | r]] <pattern>";
+    std::string synopsis = "search [directory] [-h | -v | [-a] [-l | [-p] [-s] [-t] [-H]] [-d <max> | -r]] <pattern>";
 
     // Detailed description
     std::string description = "Prints out the paths of all files and directories matching pattern within directory.";
@@ -20,16 +20,16 @@ void printHelpMessage()
     // Author
     std::string author = "Written by Mohammed D. Belgoumri";
 
-    // Map arguments to descriptions
+    // arguments/descriptions
 
-    std::map<std::string, std::string> arguments
+    std::vector<std::pair<std::string, std::string>> arguments
     {
         {"directory (optional)", "The root directory for the search, defaults to the working directory."},
         {"pattern (mandatory)", "A wildcard pattern to match the contents of directory against."}
     };
 
-    // Map options to desciptions
-    std::map<std::string, std::string> options
+    // options/desciptions
+    std::vector<std::pair<std::string, std::string>> options
     {
         {"-a, --all", "Do not ignore hidden files and directories."},
         {"-d, --depth", "Search in directory and its subdirectories up to a depth of max. If -d is not used, max = 0."},
