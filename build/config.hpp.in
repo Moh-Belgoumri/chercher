@@ -1,0 +1,4 @@
+#define VERSION_MAJOR @search_VERSION_MAJOR@
+#define VERSION_MINOR @search_VERSION_MINOR@
+#define VERSION_PATCH @search_VERSION_PATCH@
+#define VERSION_STRING "@search_VERSION@"

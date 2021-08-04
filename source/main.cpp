@@ -3,6 +3,6 @@
 
 int main(int argc, char const *argv[])
 {
-    printHelpMessage(true);
+    printVersion(true);
     return EXIT_SUCCESS;
 }

@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 #include <iomanip>
 #include <tuple>
-#define VERSION "1.0.0"
+
 
 void printHelpMessage(bool shouldPrintHelpMessage);
 void printVersion(bool shouldPrintVersion);
