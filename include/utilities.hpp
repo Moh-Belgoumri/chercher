@@ -12,6 +12,6 @@
 #include <tuple>
 #define VERSION "1.0.0"
 
-void printHelpMessage();
-void printVersion();
+void printHelpMessage(bool shouldPrintHelpMessage);
+void printVersion(bool shouldPrintVersion);
 #endif // __UTILITIES__HPP__
