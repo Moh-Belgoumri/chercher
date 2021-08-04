@@ -1,3 +1,0 @@
-/home/mohammed/Work/Projects/search/build/CMakeFiles/rebuild_cache.dir
-/home/mohammed/Work/Projects/search/build/CMakeFiles/edit_cache.dir
-/home/mohammed/Work/Projects/search/build/CMakeFiles/search.dir
