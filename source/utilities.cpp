@@ -12,7 +12,7 @@ void printHelpMessage()
     std::string shortDescription = "search - search for files and directories.";
 
     // Synopsis
-    std::string synopsis = "search [directory] [h | v | [a] [-l | [p] [s] [t] [H]] [-d <max> | r]] pattern";
+    std::string synopsis = "search [directory] [-h | -v | [-a] [-l | [-p] [-s] [-t] [-H]] [-d <max> | r]] <pattern>";
 
     // Detailed description
     std::string description = "Prints out the paths of all files and directories matching pattern within directory.";
