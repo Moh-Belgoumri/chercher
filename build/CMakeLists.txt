@@ -15,5 +15,5 @@ include_directories(${WORKING_DIRECTORY})
 configure_file(config.hpp.in ${WORKING_DIRECTORY}/include/config.hpp)
 set_target_properties(
     search PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${WORKING_DIRECTORY}/out
+    RUNTIME_OUTPUT_DIRECTORY ${WORKING_DIRECTORY}/out/debug
 )
