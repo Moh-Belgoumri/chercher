@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <iomanip>
 #include <tuple>
+#include "include/config.hpp"
 
 
 void printHelpMessage(bool shouldPrintHelpMessage);

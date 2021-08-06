@@ -1,5 +1,5 @@
 #include "include/utilities.hpp"
-#include "include/config.hpp"
+
 
 /**
  * @brief Prints help message and exits
