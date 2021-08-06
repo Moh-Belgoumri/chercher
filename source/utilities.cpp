@@ -6,9 +6,8 @@
  * @author Mohammed D. Belgoumri
  * TODO : Merge std::cout calls 
 */
-void printHelpMessage(bool shouldPrintHelpMessage)
+void printHelpMessage()
 {
-    if (!shouldPrintHelpMessage) return;
     // Short description string
     std::string shortDescription = "search - search for files and directories.";
 
@@ -102,8 +101,8 @@ void printHelpMessage(bool shouldPrintHelpMessage)
  * @brief Prints the program version and exits.
  * @author Mohammed D. Belgoumri
 */
-void printVersion(bool shouldPrintVersion)
+void printVersion()
 {
-    if (shouldPrintVersion) std::cout << "This is search version " << VERSION_STRING << std::endl;
+    std::cout << "This is search version " << VERSION_STRING << std::endl;
 }
 

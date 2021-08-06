@@ -13,6 +13,6 @@
 #include "include/config.hpp"
 
 
-void printHelpMessage(bool shouldPrintHelpMessage);
-void printVersion(bool shouldPrintVersion);
+void printHelpMessage();
+void printVersion();
 #endif // __UTILITIES__HPP__
