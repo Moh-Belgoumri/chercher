@@ -9,6 +9,5 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: cd ${github.workspace}
       - run: cmake -S ${github.workspace}/build/ -B ${github.workspace}/build/
       - run: make -C ${github.workspace}/build/
