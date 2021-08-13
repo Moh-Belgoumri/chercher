@@ -1,0 +1,14 @@
+name: CI/CD 
+on: 
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cd ${github.workspace}
+      - run: cmake -S build/ -B build/
+      - run: make -C build
